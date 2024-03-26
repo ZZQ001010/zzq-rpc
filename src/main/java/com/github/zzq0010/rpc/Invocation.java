@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.github.leeyazhou.rpc;
+package com.github.zzq0010.rpc;
 
 import java.io.Serializable;
 
 /**
- * @author leeyazhou
+ * @author zzq
  *
  */
 public class Invocation implements Serializable {

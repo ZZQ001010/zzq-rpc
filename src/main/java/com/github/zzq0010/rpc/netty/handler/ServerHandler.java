@@ -1,12 +1,13 @@
 /**
  * 
  */
-package com.github.leeyazhou.rpc;
+package com.github.zzq0010.rpc.netty.handler;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import com.github.zzq0010.rpc.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +42,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<Message> {
         }
     }
 
-    private Object doProcess(Message msg) throws Exception {
+    public Object doProcess(Message msg) throws Exception {
         Object prossor = prossorCache.get(msg.getInvocation().getServiceName());
         if (prossor == null) {
             throw new IllegalAccessError("no prossor [" + msg.getInvocation().getServiceName() + "] found");

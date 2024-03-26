@@ -6,7 +6,7 @@ simple-rpc是一个简单的RPC框架示例，用于演示如何能够快速定�
 
 通过运行一下程序，使用simple-rpc框架提供的RPC功能。
 
-- com.github.leeyazhou.example.ProviderMain
+- com.github.zzq0010.example.ProviderMain
 
 ```
     public static void main(String[] args) {
@@ -16,7 +16,7 @@ simple-rpc是一个简单的RPC框架示例，用于演示如何能够快速定�
     }
 ```
 
-- com.github.leeyazhou.example.ConsumerMain
+- com.github.zzq0010.example.ConsumerMain
 
 ```
     EchoService echoService = ProxyFactory.getProxy(EchoService.class,

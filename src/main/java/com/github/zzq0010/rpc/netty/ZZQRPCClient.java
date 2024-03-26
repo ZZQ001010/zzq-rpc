@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.github.leeyazhou.rpc;
+package com.github.zzq0010.rpc.netty;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -10,6 +10,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.github.zzq0010.rpc.framework.RPCClient;
+import com.github.zzq0010.rpc.netty.handler.ClientHandler;
+import com.github.zzq0010.rpc.Invocation;
+import com.github.zzq0010.rpc.Message;
+import com.github.zzq0010.rpc.ProtocolCodec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,11 +28,11 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 /**
- * @author leeyazhou
+ * @author zzq
  *
  */
-public class NettyClient {
-    private static final Logger                            logger      = LoggerFactory.getLogger(NettyClient.class);
+public class ZZQRPCClient implements RPCClient {
+    private static final Logger                            logger      = LoggerFactory.getLogger(ZZQRPCClient.class);
     private static final NioEventLoopGroup                 worker      = new NioEventLoopGroup(0);
     private final String                                   host;
     private final int                                      port;
@@ -37,7 +42,7 @@ public class NettyClient {
     private final AtomicBoolean                            init        = new AtomicBoolean();
     private Bootstrap                                      bootstrap;
 
-    public NettyClient(String host, int port) {
+    public ZZQRPCClient(String host, int port) {
         this.host = host;
         this.port = port;
     }
@@ -51,7 +56,7 @@ public class NettyClient {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
                 ch.pipeline().addLast(new ProtocolCodec());
-                ch.pipeline().addLast(new ClientHandler(NettyClient.this));
+                ch.pipeline().addLast(new ClientHandler(ZZQRPCClient.this));
             }
         });
     }

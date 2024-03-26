@@ -1,10 +1,10 @@
 /**
  * 
  */
-package com.github.leeyazhou.rpc;
+package com.github.zzq0010.rpc;
 
 /**
- * @author leeyazhou
+ * @author zzq
  *
  */
 public class URL {

@@ -1,18 +1,18 @@
 /**
  * 
  */
-package com.github.leeyazhou.rpc;
+package com.github.zzq0010.rpc;
 
 import java.util.List;
 
-import com.github.leeyazhou.rpc.serializer.JdkSerializer;
 
+import com.github.zzq0010.rpc.serializer.JdkSerial;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageCodec;
 
 /**
- * @author leeyazhou
+ * @author zzq
  *
  */
 public class ProtocolCodec extends ByteToMessageCodec<Message> {
@@ -21,7 +21,7 @@ public class ProtocolCodec extends ByteToMessageCodec<Message> {
 	private final byte PROTOCOL_CODE = (byte) 0;
 	private final byte TYPE_REQUEST = (byte) 0;
 	private final byte TYPE_RESPONSE = (byte) 1;
-	private final JdkSerializer serializer = new JdkSerializer();
+	private final JdkSerial serializer = new JdkSerial();
 
 	@Override
 	protected void encode(ChannelHandlerContext ctx, Message msg, ByteBuf out) throws Exception {

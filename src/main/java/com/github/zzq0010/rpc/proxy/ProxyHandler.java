@@ -1,14 +1,16 @@
 /**
  * 
  */
-package com.github.leeyazhou.rpc.proxy;
+package com.github.zzq0010.rpc.proxy;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-import com.github.leeyazhou.rpc.Invocation;
-import com.github.leeyazhou.rpc.NettyClient;
-import com.github.leeyazhou.rpc.URL;
+import com.github.zzq0010.rpc.Invocation;
+import com.github.zzq0010.rpc.URL;
+import com.github.zzq0010.rpc.config.RPCConfig;
+import com.github.zzq0010.rpc.framework.RPCClient;
 
 /**
  * @author leeyazhou
@@ -18,12 +20,25 @@ public class ProxyHandler implements InvocationHandler {
 
     private Class<?>    interfaceClass;
     private URL         url;
-    private NettyClient client;
+    private RPCClient client;
 
-    public ProxyHandler(Class<?> interfaceClass, URL url) {
+    public ProxyHandler(Class<?> interfaceClass, RPCConfig config) {
         this.interfaceClass = interfaceClass;
-        this.url = url;
-        this.client = new NettyClient(this.url.getHost(), this.url.getPort());
+        this.url = new URL().setHost(config.serviceHost).setPort(config.servicePort);
+        Class<? extends RPCClient> rpcClientClazz = config.protocol.getRpcClientClazz();
+        Constructor<? extends RPCClient> constructor = null;
+        try {
+            constructor = rpcClientClazz.getConstructor(String.class, int.class);
+        } catch (NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        RPCClient rpcClient = null;
+        try {
+            rpcClient = constructor.newInstance(config.serviceHost, config.servicePort);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        this.client = rpcClient;
         this.client.init();
         this.client.startup();
     }

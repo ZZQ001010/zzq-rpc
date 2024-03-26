@@ -1,10 +1,10 @@
 /**
  * 
  */
-package com.github.leeyazhou.example.service;
+package com.github.zzq0010.example.service;
 
 /**
- * @author leeyazhou
+ * @author zzq
  *
  */
 public class EchoServiceImpl implements EchoService {
