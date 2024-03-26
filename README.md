@@ -1,27 +1,19 @@
-# simple-rpc
+## 配置文件
+```java
+    public Protocol protocol = Protocol.HTTP;
 
-simple-rpc是一个简单的RPC框架示例，用于演示如何能够快速定制一套私有通讯协议，基于高性能网络通讯框架Netty开发。
+    public Serial serial =  new JdkSerial();
 
-## example
+    public static ProxyMode proxyMode = ProxyMode.CGLIB;
 
-通过运行一下程序，使用simple-rpc框架提供的RPC功能。
+    public int servicePort = 8080;
 
-- com.github.zzq0010.example.ProviderMain
-
+    public String serviceHost = "127.0.0.1";
 ```
-    public static void main(String[] args) {
-        NettyServer server = new NettyServer("127.0.0.1", 25001);
-        server.registerProssor(EchoService.class.getName(), new EchoServiceImpl());
-        server.startup();
-    }
-```
-
-- com.github.zzq0010.example.ConsumerMain
-
-```
-    EchoService echoService = ProxyFactory.getProxy(EchoService.class,
-        new URL().setHost("127.0.0.1").setPort(25001));
-    System.out.println("结果：" + echoService.echo("test echo"));
-    System.out.println("结果：" + echoService.hello("Simple RPC"));
-    
-```
+## 配置详解
+### 协议
+- HTTP
+- ZZQ
+### 代理模式
+- JDK proxy
+- CGLIB proxy
